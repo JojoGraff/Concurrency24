@@ -1,0 +1,15 @@
+Explanation:
+
+- We use an Object (tableLock) for intrinsic locking instead of ReentrantLock.
+- The wait() and notifyAll() methods are used to coordinate between philosophers.
+- When a philosopher finishes eating or thinks, it notifies all other philosophers.
+- The solution avoids explicit condition variables (Condition) and uses the built-in wait/notify mechanism.
+
+
+Why is this solution less efficient than using a ReentrantLock and Condition variables?
+
+- The intrinsic lock approach uses a single lock for the entire table, which means that only one philosopher can eat at a time. This can lead to contention and reduced parallelism.
+- In contrast, ReentrantLock allows more fine-grained locking (e.g., per philosopher), enabling better concurrency.
+- Additionally, Condition variables provide more flexibility (e.g., waiting with a timeout) compared to wait() and notifyAll().
+
+Overall, the ReentrantLock and Condition approach is more efficient and provides better control over synchronization. However, the intrinsic lock solution is simpler and easier to understand
